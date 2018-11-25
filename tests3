@@ -1,0 +1,2 @@
+chmod 644 pihid/tests/*.py
+python3 -m nose --with-specplugin $1
