@@ -2,8 +2,8 @@ from .USBConfig import Config
 
 
 class Device(object):
-    def __init__(self, serial_number, manufacturer, product_name):
-        self.serial_number = serial_number
+    def __init__(self, serialnumber, manufacturer, product_name):
+        self.serialnumber = serialnumber
         self.manufacturer = manufacturer
         self.product_name = product_name
         self.vendor_id = "0x1d6b"
@@ -17,9 +17,3 @@ class Device(object):
         self.configs.append(cfg)
 
         self.functions = []
-
-    def is_installed(self):
-        pass
-
-    def install(self):
-        pass

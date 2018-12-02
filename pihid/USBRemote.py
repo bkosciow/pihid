@@ -75,3 +75,6 @@ class Remote(object):
             return True
 
         return False
+
+    def get_descriptor(self):
+        return DESCRIPTOR

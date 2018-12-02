@@ -10,7 +10,7 @@ class TestUSBDevice(object):
 
     def test_init(self):
         dev = Device('serial123', 'main', 'testdevice')
-        assert_equal(dev.serial_number, 'serial123')
+        assert_equal(dev.serialnumber, 'serial123')
         assert_equal(dev.manufacturer, 'main')
         assert_equal(dev.product_name, 'testdevice')
 
