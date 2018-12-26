@@ -42,6 +42,21 @@ class TestUSBInstall(object):
             call("/a"),
             call("/a/strings/0x101"),
             call("/a/configs/c.1/strings/0x101"),
+
         ])
 
+    def test_files_should_be_created(self):
+        self.device.path = "/a"
+        self.installer._fileputcontent = MagicMock()
+        self.installer._create_files()
+        self.installer._fileputcontent.assert_has_calls([
+            call("/a/idVendor", "0x1d6b"),
+            call("/a/idProduct", "0x0104"),
+            call("/a/bcdDevice", "0x0100"),
+            call("/a/bcdUSB", "0x0200"),
+            call("/a/strings/0x409/serialnumber", "serial123"),
+            call("/a/strings/0x409/manufacturer", "main"),
+            call("/a/strings/0x409/product", "testdevice"),
+            call("/a/configs/c.1/MaxPower", "250")
+        ])
 

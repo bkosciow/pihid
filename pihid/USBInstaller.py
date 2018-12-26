@@ -33,7 +33,7 @@ class Installer(object):
 
         self._fileputcontent(path + "/strings/" + lang + "/serialnumber", self.device.serialnumber)
         self._fileputcontent(path + "/strings/" + lang + "/manufacturer", self.device.manufacturer)
-        self._fileputcontent(path + "/strings/" + lang + "/product", self.device.product)
+        self._fileputcontent(path + "/strings/" + lang + "/product", self.device.product_name)
 
         # self._fileputcontent(path + "/configs/c.1/strings/" + lang + "/configuration", "Config 1: ECM network")
         self._fileputcontent(path + "/configs/c.1/MaxPower", "250")
