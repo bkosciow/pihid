@@ -6,11 +6,12 @@ class Installer(object):
         self.device = device
 
     def is_installed(self):
-        pass
+        return self._dir_exists(self.device.path)
 
     def install(self):
         self._create_dirs(self.device.path, self.device.lang)
         self._create_files()
+        self._create_configs()
         self._create_functions()
 
     def _create_dirs(self, path, lang):
@@ -35,8 +36,13 @@ class Installer(object):
         self._fileputcontent(path + "/strings/" + lang + "/manufacturer", self.device.manufacturer)
         self._fileputcontent(path + "/strings/" + lang + "/product", self.device.product_name)
 
-        # self._fileputcontent(path + "/configs/c.1/strings/" + lang + "/configuration", "Config 1: ECM network")
-        self._fileputcontent(path + "/configs/c.1/MaxPower", "250")
+    def _create_configs(self):
+        path = self.device.path
+        id = 0
+        for cfg in self.device.configs:
+            id += 1
+            for k, v in cfg.params.items():
+                self._fileputcontent(path + "/configs/c."+str(id)+"/" + k, str(v))
 
     def _create_functions(self):
         pass

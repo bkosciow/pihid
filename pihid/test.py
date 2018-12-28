@@ -1,9 +1,10 @@
 import sys
 sys.path.append("../")
-from pihid.USBConfig import Config
+from pihid import USBDevice, USBInstaller
 
-c1 = Config()
-print(c1.id)
-c2 = Config()
-print(c2.id)
-print(c1.id)
+dev = USBDevice.Device('123', 'hone', 'rpihone')
+installer = USBInstaller.Installer(dev)
+
+installer.install()
+
+

@@ -22,12 +22,14 @@ class TestUSBInstall(object):
         self.installer._create_dirs = MagicMock()
         self.installer._create_files = MagicMock()
         self.installer._create_functions = MagicMock()
+        self.installer._create_configs = MagicMock()
 
         self.installer.install()
 
         self.installer._create_dirs.assert_called_with("/a", "0x409")
         self.installer._create_files.assert_called_with()
         self.installer._create_functions.assert_called_with()
+        self.installer._create_configs.assert_called_with()
 
     def test_dirs_should_be_created(self):
         def always_false(a):
@@ -56,7 +58,13 @@ class TestUSBInstall(object):
             call("/a/bcdUSB", "0x0200"),
             call("/a/strings/0x409/serialnumber", "serial123"),
             call("/a/strings/0x409/manufacturer", "main"),
-            call("/a/strings/0x409/product", "testdevice"),
-            call("/a/configs/c.1/MaxPower", "250")
+            call("/a/strings/0x409/product", "testdevice")
         ])
 
+    def test_configs_should_be_created(self):
+        self.device.path = "/a"
+        self.installer._fileputcontent = MagicMock()
+        self.installer._create_configs()
+        self.installer._fileputcontent.assert_has_calls([
+            call("/a/configs/c.1/MaxPower", "250")
+        ])
