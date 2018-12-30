@@ -64,7 +64,7 @@ KEYS = {
 
 class Remote(object):
     def __init__(self):
-        pass
+        self.report_id = 0
 
     def press(self, key):
         pass
