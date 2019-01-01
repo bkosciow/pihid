@@ -18,7 +18,6 @@ class Installer(object):
     def _enable(self):
         path = self.device.path
         tmp = os.listdir("/sys/class/udc")
-        # fileputcontent(path + "/UDC", tmp[0])
         self._fileputcontent(path + "/UDC",  tmp[0])
 
     def _create_dirs(self):

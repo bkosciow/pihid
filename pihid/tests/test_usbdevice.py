@@ -31,3 +31,13 @@ class TestUSBDevice(object):
         f1 = Remote()
         self.device.add('remote1', f1)
         assert_equal(f1.report_id, 2)
+
+    def test_should_return_device(self):
+        f = Remote()
+        self.device.add('remote', f)
+        assert_equal(self.device.remote, f)
+
+    def test_should_return_none_if_device_not_exists(self):
+        f = Remote()
+        self.device.add('remote', f)
+        assert_equal(self.device.remoter, None)

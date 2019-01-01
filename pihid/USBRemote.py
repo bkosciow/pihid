@@ -67,14 +67,17 @@ class Remote(object):
         self.report_id = 0
 
     def press(self, key):
-        pass
+        report = chr(self.report_id) + chr(key) + chr(0)
+        self.write_report(report)
+        self.write_report(chr(self.report_id) + chr(0) + chr(0))
+        return report
 
     def __getattr__(self, item):
         if item.upper() in KEYS:
-            self.press(KEYS[item.upper()])
-            return True
+            return self.press(KEYS[item.upper()])
 
-        return False
+        return None
 
     def get_descriptor(self):
         return DESCRIPTOR
+

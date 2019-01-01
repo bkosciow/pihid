@@ -24,6 +24,17 @@ class Device(object):
 
     def add(self, name, device):
         device.report_id = self._functions_counter
+        device.write_report = write_report
         self.functions[name] = device
         self.function_names.append(name)
         self._functions_counter *= 2
+
+    def __getattr__(self, item):
+        if item in self.functions:
+            return self.functions[item]
+        return None
+
+
+def write_report(report):
+    with open('/dev/hidg0', 'rb+') as fd:
+        fd.write(report.encode())
