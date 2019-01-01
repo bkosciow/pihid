@@ -13,6 +13,7 @@ class Device(object):
         self.port_name = "hid.usb0"
         self.protocol = "0"
         self.subclass = "0"
+        self.report_length = "8"
 
         self.configs = []
         cfg = Config()

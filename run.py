@@ -4,12 +4,10 @@ from pihid import USBDevice, USBInstaller, USBRemote
 
 dev = USBDevice.Device('123', 'hone', 'rpihone')
 dev.add('remote', USBRemote.Remote())
-# dev.add('remote1', USBRemote.Remote())
-# dev.add('remote2', USBRemote.Remote())
-# dev.add('remote3', USBRemote.Remote())
 
 installer = USBInstaller.Installer(dev)
 if not installer.is_installed():
     installer.install()
+    exit()
 
-print(dev.remote.volume_up)
+dev.remote.mute

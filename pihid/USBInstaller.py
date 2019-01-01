@@ -49,9 +49,11 @@ class Installer(object):
 
     def _create_configs(self):
         path = self.device.path
+        lang = self.device.lang
         _id = 0
         for cfg in self.device.configs:
             _id += 1
+            self._fileputcontent(path + "/configs/c."+str(_id)+"/strings/" + lang + "/configuration", "Config "+str(_id))
             for k, v in cfg.params.items():
                 self._fileputcontent(path + "/configs/c."+str(_id)+"/" + k, str(v))
 
@@ -63,6 +65,9 @@ class Installer(object):
             desc = self._get_desc_for_function(fun)
             descriptors += desc
         self._fileputcontent(path + "/functions/" + self.device.port_name + "/report_desc", descriptors, "wb")
+        self._fileputcontent(path + "/functions/" + self.device.port_name + "/report_length", self.device.report_length)
+        self._fileputcontent(path + "/functions/" + self.device.port_name + "/protocol", "0")
+        self._fileputcontent(path + "/functions/" + self.device.port_name + "/subclass", "0")
         self._create_symlink(path + "/functions/" + self.device.port_name, path + "/configs/c.1/" + self.device.port_name)
 
     def _fileputcontent(self, filename, content, mode="w"):

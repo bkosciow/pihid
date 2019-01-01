@@ -65,6 +65,7 @@ KEYS = {
 class Remote(object):
     def __init__(self):
         self.report_id = 0
+        self.write_report = None
 
     def press(self, key):
         report = chr(self.report_id) + chr(key) + chr(0)
