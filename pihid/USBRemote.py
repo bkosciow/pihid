@@ -1,3 +1,4 @@
+from .USBCapability import Capability
 
 DESCRIPTOR = [
     0x05, 0x0c,                     #	Usage Page (Consumer Devices)
@@ -50,23 +51,28 @@ DESCRIPTOR = [
     0xc0                            #	End Collection
 ]
 
+VOLUME_UP = 0x01
+VOLUME_DOWN = 0x02
+MUTE = 0x04
+PLAY = 0x08
+PAUSE = 0x10
+STOP = 0x20
+NEXT = 0x40
+PREVIOUS = 0x80
+
 KEYS = {
-    'VOLUME_UP': 0x01,
-    'VOLUME_DOWN': 0x02,
-    'MUTE': 0x04,
-    'PLAY': 0x08,
-    'PAUSE': 0x10,
-    'STOP': 0x20,
-    'NEXT': 0x40,
-    'PREVIOUS': 0x80,
+    'VOLUME_UP': VOLUME_UP,
+    'VOLUME_DOWN': VOLUME_DOWN,
+    'MUTE': MUTE,
+    'PLAY': PLAY,
+    'PAUSE': PAUSE,
+    'STOP': STOP,
+    'NEXT': NEXT,
+    'PREVIOUS': PREVIOUS,
 }
 
 
-class Remote(object):
-    def __init__(self):
-        self.report_id = 0
-        self.write_report = None
-
+class Remote(Capability):
     def press(self, key):
         report = chr(self.report_id) + chr(key) + chr(0)
         self.write_report(report)
